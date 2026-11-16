@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* Custom scrollbars for archival document areas */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d2f26;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b89355;
+}
+
+/* Authentic ink bleed effect without lagging mobile GPUs */
+.ink-text {
+  text-shadow: 0 0 0.4px rgba(45, 30, 20, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Desk Lighting Layer (Tungsten lamp illumination above wood, below evidence objects) */
+.desk-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease-out;
+  background:
+    radial-gradient(
+      ellipse 16% 18% at 81% 25%,
+      rgba(255, 230, 175, 0.38) 0%,
+      rgba(255, 175, 75, 0.2) 40%,
+      transparent 85%
+    ),
+    radial-gradient(
+      ellipse 38% 43% at 76% 34%,
+      rgba(255, 192, 101, 0.27) 0%,
+      rgba(230, 141, 55, 0.16) 35%,
+      rgba(158, 79, 24, 0.06) 65%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 68% 58% at 55% 45%,
+      rgba(240, 165, 80, 0.09) 0%,
+      rgba(180, 100, 35, 0.04) 50%,
+      transparent 100%
+    );
+  mix-blend-mode: screen;
+}
+
+.lamp-off .desk-light {
+  opacity: 0.15;
+}
+
+/* Tea Steam Animations */
+@keyframes teaSteam {
+  0%   { transform: translateY(0) translateX(0) scaleX(0.9); opacity: 0; }
+  25%  { opacity: 0.22; }
+  70%  { opacity: 0.12; }
+  100% { transform: translateY(-30px) translateX(9px) scaleX(1.25); opacity: 0; }
+}
+
+.steam-trail-1 {
+  animation: teaSteam 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.steam-trail-2 {
+  animation: teaSteam 3.9s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite;
+}
+
+.steam-trail-3 {
+  animation: teaSteam 4.5s cubic-bezier(0.4, 0, 0.2, 1) 2.3s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steam-trail-1,
+  .steam-trail-2,
+  .steam-trail-3 {
+    animation: none !important;
+    display: none !important;
+  }
+}
